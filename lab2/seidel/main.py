@@ -14,6 +14,14 @@ def generate_matrix(dimension):
             lhs[row][row] = sum * 1.2
     return lhs, rhs
 
+def hilbert_matrix(dimension):
+    matrix = numpy.zeros((dimension, dimension))
+    for row in range(dimension):
+        for col in range(dimension):
+            matrix[row][col] = 1 / (row + col + 1)
+    rhs = (numpy.random.random((dimension, 1)) * 100).round()  
+    return matrix, rhs         
+
 def check_solution(lhs, rhs, solution):
     dimension = lhs.shape[0]
     lhs_obtained = numpy.zeros_like(rhs)    
@@ -28,9 +36,10 @@ def check_solution(lhs, rhs, solution):
             return False
     return True   
 
-dimension = 100
+dimension = 10
 
 lhs, rhs = generate_matrix(dimension)
+# lhs, rhs = hilbert_matrix(dimension)
 
 print(lhs)
 print(rhs)
